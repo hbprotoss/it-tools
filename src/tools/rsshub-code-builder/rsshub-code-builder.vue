@@ -1,16 +1,33 @@
 <script setup lang="ts">
 import { MD5 } from 'crypto-js';
+import Cookies from 'js-cookie';
+import { useCopy } from '@/composable/copy';
 
 const host = ref('');
 const path = ref('');
 const finalUrl = ref('');
 const key = ref('');
 
+onMounted(() => {
+  // console.log(cookie);
+  if (Cookies.get('key')) {
+    key.value = Cookies.get('key')!;
+  }
+  if (Cookies.get('host')) {
+    host.value = Cookies.get('host')!;
+  }
+});
+
 function build() {
   const realPath = path.value.split('?')[0];
   const code = MD5(realPath + key.value);
   const pre = path.value.includes('?') ? '&' : '?';
   finalUrl.value = `${host.value}${path.value}${pre}code=${code}`;
+
+  Cookies.set('key', key.value);
+  Cookies.set('host', host.value);
+
+  useCopy({ source: finalUrl }).copy();
 }
 </script>
 
