@@ -16,6 +16,9 @@ onMounted(() => {
   if (Cookies.get('host')) {
     host.value = Cookies.get('host')!;
   }
+  if (Cookies.get('path')) {
+    path.value = Cookies.get('path')!;
+  }
 });
 
 function build() {
@@ -26,6 +29,7 @@ function build() {
 
   Cookies.set('key', key.value);
   Cookies.set('host', host.value);
+  Cookies.set('path', path.value);
 
   useCopy({ source: finalUrl }).copy();
 }
