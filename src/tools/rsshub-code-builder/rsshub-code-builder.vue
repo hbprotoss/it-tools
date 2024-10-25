@@ -64,7 +64,7 @@ function build() {
       label="Final URL:"
     />
     <div mt-5 flex justify-center>
-      <c-button @click="build()">Build</c-button>
+      <c-button @click="build()">Build and Copy</c-button>
     </div>
   </div>
 </template>
