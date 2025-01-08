@@ -3,6 +3,8 @@ FROM node:lts-alpine AS build-stage
 # Set environment variables for non-interactive npm installs
 ENV NPM_CONFIG_LOGLEVEL warn
 ENV CI true
+ENV HTTP_PROXY http://192.168.0.2:8989
+ENV HTTPS_PROXY http://192.168.0.2:8989
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 RUN npm install -g pnpm && pnpm i --frozen-lockfile

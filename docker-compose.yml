@@ -2,6 +2,12 @@ services:
   it-tools:
     build:
       context: .
+      args:
+        - HTTP_PROXY=http://192.168.0.2:8989
+        - HTTPS_PROXY=http://192.168.0.2:8989
     restart: unless-stopped
+    environment:
+      - HTTP_PROXY=http://192.168.0.2:8989
+      - HTTPS_PROXY=http://192.168.0.2:8989
     ports:
       - ${SERVER_PORT:-8080}:80
